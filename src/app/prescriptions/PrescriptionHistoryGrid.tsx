@@ -25,8 +25,16 @@ export function PrescriptionHistoryGrid({ prescriptions }: PrescriptionHistoryGr
   const rows = prescriptions.map(p => ({ ...p, id: p.id }));
 
   return (
-    <div style={{ height: 600, width: '100%' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        maxHeight: 400,
+        minHeight: 200,
+      }}
+    >
       <DataGrid
+        rowHeight={50}
         rows={rows}
         columns={columns}
         pageSizeOptions={[20, 50, 100]}

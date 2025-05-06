@@ -1,7 +1,7 @@
 'use client';
 
 // Import core react and next.js modules
-import { useEffect, useState } from 'react';
+import { useEffect, useState, use } from 'react';
 import { useRouter } from 'next/navigation';
 
 // Import external modules and libraries i.e.: Lodash, MUI, etc.
@@ -27,7 +27,8 @@ import { ThemeProvider } from '@/shared/components/ThemeProvider';
 // Import styles
 import './prescription-detail.css';
 
-export default function PrescriptionDetail({ params }: { params: { id: string } }) {
+export default function PrescriptionDetail(props: { params: Promise<{ id: string }> }) {
+  const params = use(props.params);
   const router = useRouter();
   const {
     selectedPrescription,

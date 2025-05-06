@@ -1,6 +1,6 @@
 # Mini-Hthera
 
-A modern prescription management system built with Next.js 14, TypeScript, and Material-UI.
+A modern prescription management system built with Next.js 15, TypeScript, and Material-UI.
 
 ## Features
 
