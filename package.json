@@ -2,6 +2,7 @@
   "name": "mini-hthera",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "yarn@1.22.22",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,7 +11,9 @@
     "format": "prettier --write .",
     "type-check": "tsc --noEmit",
     "prepare": "husky",
-    "pre-commit": "lint-staged"
+    "pre-commit": "lint-staged",
+    "clean": "yarn cache clean && rm -rf node_modules .next",
+    "upgrade-interactive": "yarn upgrade-interactive --latest"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -46,5 +49,9 @@
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
     "typescript": "^5.4.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "yarn": ">=1.22.0"
   }
 }
