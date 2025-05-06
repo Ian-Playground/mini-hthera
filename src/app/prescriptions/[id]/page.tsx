@@ -22,7 +22,8 @@ import { useState } from 'react';
 
 export default function PrescriptionDetail({ params }: { params: { id: string } }) {
   const router = useRouter();
-  const { selectedPrescription, loading, error, fetchPrescriptionById, requestRefill } = usePrescriptionStore();
+  const { selectedPrescription, loading, error, fetchPrescriptionById, requestRefill } =
+    usePrescriptionStore();
   const [isRefillDialogOpen, setIsRefillDialogOpen] = useState(false);
 
   useEffect(() => {
@@ -70,11 +71,7 @@ export default function PrescriptionDetail({ params }: { params: { id: string } 
     <ThemeProvider>
       <Layout>
         <Box sx={{ mb: 4 }}>
-          <Button
-            variant="outlined"
-            onClick={() => router.back()}
-            sx={{ mb: 4 }}
-          >
+          <Button variant="outlined" onClick={() => router.back()} sx={{ mb: 4 }}>
             Back to Prescriptions
           </Button>
 
@@ -87,29 +84,24 @@ export default function PrescriptionDetail({ params }: { params: { id: string } 
               <Typography variant="h6" gutterBottom>
                 Dosage
               </Typography>
-              <Typography paragraph>
-                {selectedPrescription.dosage}
-              </Typography>
+              <Typography paragraph>{selectedPrescription.dosage}</Typography>
 
               <Typography variant="h6" gutterBottom>
                 Instructions
               </Typography>
-              <Typography paragraph>
-                {selectedPrescription.instructions}
-              </Typography>
+              <Typography paragraph>{selectedPrescription.instructions}</Typography>
 
               <Typography variant="h6" gutterBottom>
                 Prescribing Doctor
               </Typography>
-              <Typography paragraph>
-                {selectedPrescription.prescribingDoctor}
-              </Typography>
+              <Typography paragraph>{selectedPrescription.prescribingDoctor}</Typography>
 
               <Typography variant="h6" gutterBottom>
                 Refill Information
               </Typography>
               <Typography paragraph>
-                Next refill date: {format(new Date(selectedPrescription.nextRefillDate), 'MMM d, yyyy')}
+                Next refill date:{' '}
+                {format(new Date(selectedPrescription.nextRefillDate), 'MMM d, yyyy')}
               </Typography>
               <Typography paragraph>
                 Refills remaining: {selectedPrescription.refillsRemaining}
@@ -127,10 +119,7 @@ export default function PrescriptionDetail({ params }: { params: { id: string } 
           </Card>
         </Box>
 
-        <Dialog
-          open={isRefillDialogOpen}
-          onClose={() => setIsRefillDialogOpen(false)}
-        >
+        <Dialog open={isRefillDialogOpen} onClose={() => setIsRefillDialogOpen(false)}>
           <DialogTitle>Request Refill</DialogTitle>
           <DialogContent>
             <DialogContentText>
@@ -147,4 +136,4 @@ export default function PrescriptionDetail({ params }: { params: { id: string } 
       </Layout>
     </ThemeProvider>
   );
-} 
+}

@@ -14,4 +14,4 @@ export interface Prescription {
 export interface PrescriptionListFilters {
   search?: string;
   status?: Prescription['status'];
-} 
+}

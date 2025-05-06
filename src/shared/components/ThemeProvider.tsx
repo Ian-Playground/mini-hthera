@@ -36,4 +36,4 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
       {children}
     </MUIThemeProvider>
   );
-} 
+}

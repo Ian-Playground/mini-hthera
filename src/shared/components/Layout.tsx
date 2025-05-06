@@ -23,4 +23,4 @@ export function Layout({ children }: LayoutProps) {
       </Container>
     </Box>
   );
-} 
+}

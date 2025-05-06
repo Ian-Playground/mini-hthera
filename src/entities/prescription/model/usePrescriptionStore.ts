@@ -63,4 +63,4 @@ export const usePrescriptionStore = create<PrescriptionState & PrescriptionActio
   },
 
   clearError: () => set({ error: null }),
-})); 
+}));

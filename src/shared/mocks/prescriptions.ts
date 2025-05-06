@@ -37,4 +37,4 @@ export const mockPrescriptions: Prescription[] = [
     createdAt: '2024-01-20',
     updatedAt: '2024-01-20',
   },
-]; 
+];

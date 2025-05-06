@@ -1,23 +1,24 @@
-import { Prescription, PrescriptionListFilters } from '../types';
+import { PrescriptionListFilters } from '../types';
 import { PrescriptionRepository } from './prescriptionRepository';
 import { mockPrescriptions } from '@/shared/mocks/prescriptions';
 
 export const mockPrescriptionRepository: PrescriptionRepository = {
   getAll: async (filters?: PrescriptionListFilters) => {
     let result = [...mockPrescriptions];
-    
+
     if (filters?.search) {
       const searchLower = filters.search.toLowerCase();
-      result = result.filter(p => 
-        p.medicationName.toLowerCase().includes(searchLower) ||
-        p.prescribingDoctor.toLowerCase().includes(searchLower)
+      result = result.filter(
+        p =>
+          p.medicationName.toLowerCase().includes(searchLower) ||
+          p.prescribingDoctor.toLowerCase().includes(searchLower)
       );
     }
-    
+
     if (filters?.status) {
       result = result.filter(p => p.status === filters.status);
     }
-    
+
     return result;
   },
 
@@ -32,4 +33,4 @@ export const mockPrescriptionRepository: PrescriptionRepository = {
       prescription.updatedAt = new Date().toISOString();
     }
   },
-}; 
+};
