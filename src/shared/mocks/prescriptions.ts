@@ -1,0 +1,40 @@
+import { Prescription } from '@/entities/prescription/types';
+
+export const mockPrescriptions: Prescription[] = [
+  {
+    id: '1',
+    medicationName: 'Amoxicillin',
+    dosage: '500mg',
+    instructions: 'Take one tablet three times daily with meals',
+    prescribingDoctor: 'Dr. Sarah Johnson',
+    refillsRemaining: 2,
+    nextRefillDate: '2024-05-15',
+    status: 'active',
+    createdAt: '2024-03-01',
+    updatedAt: '2024-03-01',
+  },
+  {
+    id: '2',
+    medicationName: 'Lisinopril',
+    dosage: '10mg',
+    instructions: 'Take one tablet daily in the morning',
+    prescribingDoctor: 'Dr. Michael Chen',
+    refillsRemaining: 0,
+    nextRefillDate: '2024-04-20',
+    status: 'refill_requested',
+    createdAt: '2024-02-15',
+    updatedAt: '2024-03-10',
+  },
+  {
+    id: '3',
+    medicationName: 'Metformin',
+    dosage: '1000mg',
+    instructions: 'Take one tablet twice daily with meals',
+    prescribingDoctor: 'Dr. Emily Brown',
+    refillsRemaining: 1,
+    nextRefillDate: '2024-06-01',
+    status: 'active',
+    createdAt: '2024-01-20',
+    updatedAt: '2024-01-20',
+  },
+]; 
