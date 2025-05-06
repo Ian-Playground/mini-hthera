@@ -1,0 +1,48 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# JS/TS files
+*.js text
+*.jsx text
+*.ts text
+*.tsx text
+
+# JSON files
+*.json text
+
+# CSS files
+*.css text
+*.scss text
+
+# HTML files
+*.html text
+
+# Documentation
+*.md text
+*.txt text
+
+# Configs
+*.yml text
+*.yaml text
+*.toml text
+.editorconfig text
+.eslintrc text
+.prettierrc text
+.gitattributes text
+.gitignore text
+
+# Graphics
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary
+*.svg text
+
+# Fonts
+*.ttf binary
+*.woff binary
+*.woff2 binary
+
+# Force batch scripts to always use CRLF line endings
+*.{cmd,[cC][mM][dD]} text eol=crlf
+*.{bat,[bB][aA][tT]} text eol=crlf 
