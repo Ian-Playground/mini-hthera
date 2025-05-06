@@ -71,7 +71,12 @@ export default function PrescriptionDetail({ params }: { params: { id: string } 
     <ThemeProvider>
       <Layout>
         <Box sx={{ mb: 4 }}>
-          <Button variant="outlined" onClick={() => router.back()} sx={{ mb: 4 }}>
+          <Button
+            variant="outlined"
+            onClick={() => router.back()}
+            sx={{ mb: 4 }}
+            aria-label="Go back to the prescriptions list"
+          >
             Back to Prescriptions
           </Button>
 
@@ -112,6 +117,7 @@ export default function PrescriptionDetail({ params }: { params: { id: string } 
                 color="primary"
                 onClick={() => setIsRefillDialogOpen(true)}
                 disabled={selectedPrescription.status === 'refill_requested'}
+                aria-label="Request a refill for this prescription"
               >
                 Request Refill
               </Button>
@@ -119,16 +125,30 @@ export default function PrescriptionDetail({ params }: { params: { id: string } 
           </Card>
         </Box>
 
-        <Dialog open={isRefillDialogOpen} onClose={() => setIsRefillDialogOpen(false)}>
-          <DialogTitle>Request Refill</DialogTitle>
+        <Dialog
+          open={isRefillDialogOpen}
+          onClose={() => setIsRefillDialogOpen(false)}
+          aria-labelledby="refill-dialog-title"
+          aria-describedby="refill-dialog-description"
+          role="dialog"
+          aria-modal="true"
+        >
+          <DialogTitle id="refill-dialog-title">Request Refill</DialogTitle>
           <DialogContent>
-            <DialogContentText>
+            <DialogContentText id="refill-dialog-description">
               Are you sure you want to request a refill for {selectedPrescription.medicationName}?
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => setIsRefillDialogOpen(false)}>Cancel</Button>
-            <Button onClick={handleRequestRefill} color="primary" autoFocus>
+            <Button onClick={() => setIsRefillDialogOpen(false)} aria-label="Cancel refill request">
+              Cancel
+            </Button>
+            <Button
+              onClick={handleRequestRefill}
+              color="primary"
+              autoFocus
+              aria-label="Confirm refill request"
+            >
               Confirm
             </Button>
           </DialogActions>
