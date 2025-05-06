@@ -1,6 +1,6 @@
-# Mini-Healthera
+# Mini-Hthera
 
-A modern prescription management system built with Next.js 15, TypeScript, and Material-UI.
+A modern prescription management system built with Next.js 14, TypeScript, and Material-UI.
 
 ## Features
 
@@ -12,6 +12,10 @@ A modern prescription management system built with Next.js 15, TypeScript, and M
 - 📦 Package management with Yarn
 - 🔄 Git hooks with Husky
 - 🎯 Conventional commits
+- ♿ Accessibility compliance with WCAG 2.1
+- 🔍 Prescription search and filtering
+- 📋 Prescription history tracking
+- 💊 Refill request management
 
 ## Prerequisites
 
@@ -60,6 +64,52 @@ VS Code settings are configured to:
 - Use Prettier as the default formatter
 - Run ESLint fixes on save
 
+### Import Conventions
+
+Imports are organized in the following order with comments:
+
+```typescript
+// Import core react modules
+import { useState, useEffect } from 'react';
+
+// Import external modules and libraries i.e.: Lodash, MUI, etc.
+import { Box, Typography } from '@mui/material';
+import debounce from 'lodash/debounce';
+
+// Import store
+import { usePrescriptionStore } from '@/entities/prescription/model/usePrescriptionStore';
+
+// Import internal components
+import { Layout } from '@/shared/components/Layout';
+
+// Import styles
+import './styles.css';
+```
+
+### CSS Conventions
+
+We use BEM (Block Element Modifier) methodology for CSS class names:
+
+```css
+.block {
+}
+.block__element {
+}
+.block__element--modifier {
+}
+```
+
+Example:
+
+```css
+.prescriptions {
+}
+.prescriptions__header {
+}
+.prescriptions__search {
+}
+```
+
 ### Git Workflow
 
 1. **Branch Naming**
@@ -98,6 +148,8 @@ VS Code settings are configured to:
 - `yarn lint` - Run ESLint
 - `yarn format` - Format code with Prettier
 - `yarn type-check` - Run TypeScript type checking
+- `yarn test` - Run tests
+- `yarn test:coverage` - Run tests with coverage
 - `yarn clean` - Clean dependencies and build files
 - `yarn upgrade-interactive` - Interactive dependency updates
 
@@ -110,11 +162,16 @@ mini-hthera/
 ├── .vscode/          # VS Code settings
 ├── public/           # Static files
 ├── src/
-│   ├── app/         # Next.js app directory
-│   ├── components/  # React components
-│   ├── lib/         # Utility functions
-│   ├── store/       # Zustand store
-│   └── types/       # TypeScript types
+│   ├── app/                    # Next.js app directory
+│   │   └── prescriptions/     # Prescription feature pages
+│   ├── entities/              # Domain entities
+│   │   └── prescription/      # Prescription domain
+│   │       ├── api/          # API interfaces and implementations
+│   │       ├── model/        # State management
+│   │       └── types/        # TypeScript types
+│   └── shared/               # Shared components and utilities
+│       ├── components/       # Reusable components
+│       └── mocks/           # Mock data
 ├── .eslintrc.json   # ESLint configuration
 ├── .prettierrc      # Prettier configuration
 ├── .prettierignore  # Prettier ignore rules
@@ -124,6 +181,17 @@ mini-hthera/
 ├── tsconfig.json    # TypeScript configuration
 └── README.md        # Project documentation
 ```
+
+### Accessibility
+
+The application follows WCAG 2.1 guidelines and includes:
+
+- Semantic HTML
+- ARIA labels
+- Keyboard navigation
+- Skip links
+- Color contrast compliance
+- Screen reader support
 
 ## Contributing
 
