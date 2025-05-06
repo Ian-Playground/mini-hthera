@@ -1,5 +1,10 @@
+// Import core react and zustand modules
 import { create } from 'zustand';
+
+// Import types
 import { Prescription, PrescriptionListFilters } from '../types';
+
+// Import internal components
 import { mockPrescriptionRepository } from '../api/mockPrescriptionRepository';
 
 interface PrescriptionState {

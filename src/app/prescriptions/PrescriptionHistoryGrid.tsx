@@ -1,5 +1,10 @@
+// Import core react modules
 import * as React from 'react';
+
+// Import external modules and libraries i.e.: Lodash, MUI, etc.
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
+
+// Import types
 import { Prescription } from '@/entities/prescription/types';
 
 interface PrescriptionHistoryGridProps {

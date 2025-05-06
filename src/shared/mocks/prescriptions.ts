@@ -1,3 +1,4 @@
+// Import types
 import { Prescription } from '@/entities/prescription/types';
 
 export const mockPrescriptions: Prescription[] = [

@@ -1,6 +1,9 @@
+// Import core react modules
+import { ReactNode } from 'react';
+
+// Import external modules and libraries i.e.: Lodash, MUI, etc.
 import { ThemeProvider as MUIThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { ReactNode } from 'react';
 
 const theme = createTheme({
   palette: {

@@ -1,0 +1,35 @@
+.prescription-detail {
+  padding: 1rem;
+}
+
+.prescription-detail__header {
+  margin-bottom: 2rem;
+}
+
+.prescription-detail__section {
+  margin-bottom: 1.5rem;
+}
+
+.prescription-detail__label {
+  font-weight: 500;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.prescription-detail__value {
+  margin-bottom: 1rem;
+}
+
+.prescription-detail__actions {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.prescription-detail__refill-button {
+  min-width: 150px;
+}
+
+.prescription-detail__back-button {
+  min-width: 100px;
+}

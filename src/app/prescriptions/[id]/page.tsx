@@ -1,29 +1,43 @@
 'use client';
 
-import { useEffect } from 'react';
+// Import core react and next.js modules
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+
+// Import external modules and libraries i.e.: Lodash, MUI, etc.
 import {
   Box,
-  Button,
-  Card,
-  CardContent,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
   Typography,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  DialogContentText,
 } from '@mui/material';
+import { format } from 'date-fns';
+
+// Import store
 import { usePrescriptionStore } from '@/entities/prescription/model/usePrescriptionStore';
+
+// Import internal components
 import { Layout } from '@/shared/components/Layout';
 import { ThemeProvider } from '@/shared/components/ThemeProvider';
-import { format } from 'date-fns';
-import { useState } from 'react';
+
+// Import styles
+import './prescription-detail.css';
 
 export default function PrescriptionDetail({ params }: { params: { id: string } }) {
   const router = useRouter();
-  const { selectedPrescription, loading, error, fetchPrescriptionById, requestRefill } =
-    usePrescriptionStore();
+  const {
+    selectedPrescription,
+    loading,
+    error,
+    fetchPrescriptionById,
+    requestRefill,
+    setFilters,
+    fetchPrescriptions,
+  } = usePrescriptionStore();
   const [isRefillDialogOpen, setIsRefillDialogOpen] = useState(false);
 
   useEffect(() => {
@@ -35,6 +49,12 @@ export default function PrescriptionDetail({ params }: { params: { id: string } 
   const handleRequestRefill = async () => {
     await requestRefill(params.id);
     setIsRefillDialogOpen(false);
+  };
+
+  const handleBack = () => {
+    setFilters({ search: '' });
+    fetchPrescriptions();
+    router.back();
   };
 
   if (loading) {
@@ -73,56 +93,54 @@ export default function PrescriptionDetail({ params }: { params: { id: string } 
         <Box sx={{ mb: 4 }}>
           <Button
             variant="outlined"
-            onClick={() => router.back()}
+            onClick={handleBack}
             sx={{ mb: 4 }}
             aria-label="Go back to the prescriptions list"
           >
             Back to Prescriptions
           </Button>
 
-          <Card>
-            <CardContent>
-              <Typography variant="h4" component="h1" gutterBottom>
-                {selectedPrescription.medicationName}
-              </Typography>
+          <Box>
+            <Typography variant="h4" component="h1" gutterBottom>
+              {selectedPrescription.medicationName}
+            </Typography>
 
-              <Typography variant="h6" gutterBottom>
-                Dosage
-              </Typography>
-              <Typography paragraph>{selectedPrescription.dosage}</Typography>
+            <Typography variant="h6" gutterBottom>
+              Dosage
+            </Typography>
+            <Typography paragraph>{selectedPrescription.dosage}</Typography>
 
-              <Typography variant="h6" gutterBottom>
-                Instructions
-              </Typography>
-              <Typography paragraph>{selectedPrescription.instructions}</Typography>
+            <Typography variant="h6" gutterBottom>
+              Instructions
+            </Typography>
+            <Typography paragraph>{selectedPrescription.instructions}</Typography>
 
-              <Typography variant="h6" gutterBottom>
-                Prescribing Doctor
-              </Typography>
-              <Typography paragraph>{selectedPrescription.prescribingDoctor}</Typography>
+            <Typography variant="h6" gutterBottom>
+              Prescribing Doctor
+            </Typography>
+            <Typography paragraph>{selectedPrescription.prescribingDoctor}</Typography>
 
-              <Typography variant="h6" gutterBottom>
-                Refill Information
-              </Typography>
-              <Typography paragraph>
-                Next refill date:{' '}
-                {format(new Date(selectedPrescription.nextRefillDate), 'MMM d, yyyy')}
-              </Typography>
-              <Typography paragraph>
-                Refills remaining: {selectedPrescription.refillsRemaining}
-              </Typography>
+            <Typography variant="h6" gutterBottom>
+              Refill Information
+            </Typography>
+            <Typography paragraph>
+              Next refill date:{' '}
+              {format(new Date(selectedPrescription.nextRefillDate), 'MMM d, yyyy')}
+            </Typography>
+            <Typography paragraph>
+              Refills remaining: {selectedPrescription.refillsRemaining}
+            </Typography>
 
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => setIsRefillDialogOpen(true)}
-                disabled={selectedPrescription.status === 'refill_requested'}
-                aria-label="Request a refill for this prescription"
-              >
-                Request Refill
-              </Button>
-            </CardContent>
-          </Card>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => setIsRefillDialogOpen(true)}
+              disabled={selectedPrescription.status === 'refill_requested'}
+              aria-label="Request a refill for this prescription"
+            >
+              Request Refill
+            </Button>
+          </Box>
         </Box>
 
         <Dialog

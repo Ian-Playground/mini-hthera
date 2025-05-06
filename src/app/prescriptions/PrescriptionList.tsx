@@ -1,6 +1,11 @@
-import { Grid, Card, CardContent, Typography } from '@mui/material';
+// Import core react and next.js modules
 import Link from 'next/link';
+
+// Import external modules and libraries i.e.: Lodash, MUI, etc.
+import { Grid, Card, CardContent, Typography } from '@mui/material';
 import { format } from 'date-fns';
+
+// Import types
 import { Prescription } from '@/entities/prescription/types';
 
 interface PrescriptionListProps {

@@ -1,3 +1,5 @@
+export type PrescriptionStatus = 'active' | 'refill_requested' | 'expired';
+
 export interface Prescription {
   id: string;
   medicationName: string;
@@ -6,12 +8,12 @@ export interface Prescription {
   prescribingDoctor: string;
   refillsRemaining: number;
   nextRefillDate: string;
-  status: 'active' | 'refill_requested' | 'expired';
+  status: PrescriptionStatus;
   createdAt: string;
   updatedAt: string;
 }
 
 export interface PrescriptionListFilters {
   search?: string;
-  status?: Prescription['status'];
+  status?: PrescriptionStatus;
 }

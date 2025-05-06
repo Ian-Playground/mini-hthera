@@ -1,4 +1,7 @@
-import { PrescriptionListFilters } from '../types';
+// Import types
+import { Prescription, PrescriptionListFilters } from '../types';
+
+// Import internal components
 import { PrescriptionRepository } from './prescriptionRepository';
 import { mockPrescriptions } from '@/shared/mocks/prescriptions';
 

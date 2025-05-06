@@ -1,6 +1,9 @@
-import { AppBar, Box, Container, Toolbar, Typography } from '@mui/material';
+// Import core react and next.js modules
 import { ReactNode } from 'react';
 import Link from 'next/link';
+
+// Import external modules and libraries i.e.: Lodash, MUI, etc.
+import { AppBar, Box, Container, Toolbar, Typography } from '@mui/material';
 
 interface LayoutProps {
   children: ReactNode;

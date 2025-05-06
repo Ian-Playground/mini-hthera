@@ -1,0 +1,40 @@
+.prescriptions {
+  padding: 1rem;
+}
+
+.prescriptions__header {
+  margin-bottom: 2rem;
+}
+
+.prescriptions__tabs {
+  margin-bottom: 2rem;
+}
+
+.prescriptions__search {
+  margin-bottom: 2rem;
+}
+
+.prescriptions__list {
+  margin-top: 1rem;
+}
+
+.prescriptions__history-grid {
+  margin-top: 1rem;
+}
+
+/* Skip link styles */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.skip-link:focus {
+  left: 0;
+  width: auto;
+  height: auto;
+}

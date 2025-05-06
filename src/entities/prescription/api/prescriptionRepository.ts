@@ -1,3 +1,4 @@
+// Import types
 import { Prescription, PrescriptionListFilters } from '../types';
 
 export interface PrescriptionRepository {
