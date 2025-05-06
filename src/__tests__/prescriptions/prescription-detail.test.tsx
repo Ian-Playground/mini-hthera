@@ -1,5 +1,5 @@
 // Import testing utilities
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 // Import next.js modules
@@ -9,8 +9,8 @@ import { useRouter } from 'next/navigation';
 import PrescriptionDetail from '@/app/prescriptions/[id]/page';
 import { usePrescriptionStore } from '@/entities/prescription/model/usePrescriptionStore';
 
-// Import styles
-import '@/app/prescriptions/[id]/prescription-detail.css';
+// Mock CSS imports
+jest.mock('@/app/prescriptions/[id]/prescription-detail.css', () => ({}));
 
 // Mock the next/navigation module
 jest.mock('next/navigation', () => ({
@@ -46,7 +46,7 @@ describe('PrescriptionDetail', () => {
     (useRouter as jest.Mock).mockReturnValue(mockRouter);
   });
 
-  it('shows loading state', () => {
+  it('shows loading state', async () => {
     mockUsePrescriptionStore.mockReturnValue({
       loading: true,
       error: null,
@@ -54,11 +54,14 @@ describe('PrescriptionDetail', () => {
       fetchPrescriptionById: jest.fn(),
     });
 
-    render(<PrescriptionDetail params={{ id: '1' }} />);
+    await act(async () => {
+      render(<PrescriptionDetail params={Promise.resolve({ id: '1' })} />);
+    });
+
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 
-  it('shows error state', () => {
+  it('shows error state', async () => {
     const errorMessage = 'Failed to fetch prescription';
     mockUsePrescriptionStore.mockReturnValue({
       loading: false,
@@ -67,11 +70,14 @@ describe('PrescriptionDetail', () => {
       fetchPrescriptionById: jest.fn(),
     });
 
-    render(<PrescriptionDetail params={{ id: '1' }} />);
+    await act(async () => {
+      render(<PrescriptionDetail params={Promise.resolve({ id: '1' })} />);
+    });
+
     expect(screen.getByText(errorMessage)).toBeInTheDocument();
   });
 
-  it('shows not found state', () => {
+  it('shows not found state', async () => {
     mockUsePrescriptionStore.mockReturnValue({
       loading: false,
       error: null,
@@ -79,11 +85,14 @@ describe('PrescriptionDetail', () => {
       fetchPrescriptionById: jest.fn(),
     });
 
-    render(<PrescriptionDetail params={{ id: '1' }} />);
+    await act(async () => {
+      render(<PrescriptionDetail params={Promise.resolve({ id: '1' })} />);
+    });
+
     expect(screen.getByText('Prescription not found')).toBeInTheDocument();
   });
 
-  it('displays prescription details', () => {
+  it('displays prescription details', async () => {
     mockUsePrescriptionStore.mockReturnValue({
       loading: false,
       error: null,
@@ -91,7 +100,10 @@ describe('PrescriptionDetail', () => {
       fetchPrescriptionById: jest.fn(),
     });
 
-    render(<PrescriptionDetail params={{ id: '1' }} />);
+    await act(async () => {
+      render(<PrescriptionDetail params={Promise.resolve({ id: '1' })} />);
+    });
+
     expect(screen.getByText(mockPrescription.medicationName)).toBeInTheDocument();
     expect(screen.getByText(mockPrescription.dosage)).toBeInTheDocument();
     expect(screen.getByText(mockPrescription.instructions)).toBeInTheDocument();
@@ -111,10 +123,14 @@ describe('PrescriptionDetail', () => {
       fetchPrescriptions: mockFetchPrescriptions,
     });
 
-    render(<PrescriptionDetail params={{ id: '1' }} />);
+    await act(async () => {
+      render(<PrescriptionDetail params={Promise.resolve({ id: '1' })} />);
+    });
 
-    const backButton = screen.getByRole('button', { name: 'Go back to the prescriptions list' });
-    fireEvent.click(backButton);
+    const backButton = screen.getByRole('button', { name: /go back to the prescriptions list/i });
+    await act(async () => {
+      fireEvent.click(backButton);
+    });
 
     expect(mockSetFilters).toHaveBeenCalledWith({ search: '' });
     expect(mockFetchPrescriptions).toHaveBeenCalled();
@@ -131,20 +147,24 @@ describe('PrescriptionDetail', () => {
       requestRefill: mockRequestRefill,
     });
 
-    render(<PrescriptionDetail params={{ id: '1' }} />);
+    await act(async () => {
+      render(<PrescriptionDetail params={Promise.resolve({ id: '1' })} />);
+    });
 
-    // Open refill dialog
     const refillButton = screen.getByRole('button', { name: /request a refill/i });
-    fireEvent.click(refillButton);
+    await act(async () => {
+      fireEvent.click(refillButton);
+    });
 
-    // Confirm refill
     const confirmButton = screen.getByRole('button', { name: /confirm/i });
-    fireEvent.click(confirmButton);
+    await act(async () => {
+      fireEvent.click(confirmButton);
+    });
 
     expect(mockRequestRefill).toHaveBeenCalledWith('1');
   });
 
-  it('disables refill button when status is refill_requested', () => {
+  it('disables refill button when status is refill_requested', async () => {
     const prescriptionWithRefillRequested = {
       ...mockPrescription,
       status: 'refill_requested' as const,
@@ -157,13 +177,15 @@ describe('PrescriptionDetail', () => {
       fetchPrescriptionById: jest.fn(),
     });
 
-    render(<PrescriptionDetail params={{ id: '1' }} />);
+    await act(async () => {
+      render(<PrescriptionDetail params={Promise.resolve({ id: '1' })} />);
+    });
 
     const refillButton = screen.getByRole('button', { name: /request a refill/i });
     expect(refillButton).toBeDisabled();
   });
 
-  it('fetches prescription data on mount', () => {
+  it('fetches prescription data on mount', async () => {
     const mockFetchPrescriptionById = jest.fn();
     mockUsePrescriptionStore.mockReturnValue({
       loading: true,
@@ -172,7 +194,10 @@ describe('PrescriptionDetail', () => {
       fetchPrescriptionById: mockFetchPrescriptionById,
     });
 
-    render(<PrescriptionDetail params={{ id: '1' }} />);
+    await act(async () => {
+      render(<PrescriptionDetail params={Promise.resolve({ id: '1' })} />);
+    });
+
     expect(mockFetchPrescriptionById).toHaveBeenCalledWith('1');
   });
 });
